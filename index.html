@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500" ></canvas>
+	
+	<div>Hello World</div>
+	<div>Circle</div>
+</body>
+
+<script>
+
+	const rectList = [
+		{
+		x: 5,
+		y: 1,
+		width: 50,
+		height: 50,
+		color: 'purple',
+	},
+		{
+		x: 60,
+		y: 10,
+		width: 20,
+		height: 30,
+		color: 'red',
+	},
+		{
+		x: 0,
+		y: 1,
+		width: 5,
+		height: 6,
+		color: 'blue',
+	},
+	]
+
+	const canvas = document.getElementById("canvas")
+	const ctx = canvas.getContext('2d')
+	
+	function handleCanvasClick(e) {
+		console.log(e.x)
+		console.log(e.y)
+
+		rectList.push({
+			x: e.x,
+			y: e.y,
+			width: 5,
+			height: 10,
+			color: 'grey' 
+		})
+
+		updateCanvas(rectList)
+	}
+	
+	function updateCanvas(rectList) {
+
+		for (let rect of rectList) {
+			ctx.fillStyle = rect.color
+			ctx.fillRect(rect.x, rect.y, rect.width, rect.height)
+		}
+	}
+
+	canvas.onclick = handleCanvasClick
+	updateCanvas(rectList)
+
+</script>
+
+<script>
+	async function main() {
+		const res = await fetch("https://randomuser.me/api/")
+		const data = await res.json()
+		console.log(data)
+
+		const person = data["results"][0]
+
+		console.log(person.gender)
+		console.log(person.email)
+
+	}
+
+	main()
+
+</script>
+</html>
+
